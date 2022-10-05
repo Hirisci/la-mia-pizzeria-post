@@ -1,6 +1,8 @@
-﻿using la_mia_pizzeria_post.Models;
+﻿using la_mia_pizzeria_post.Data;
+using la_mia_pizzeria_post.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
 namespace la_mia_pizzeria_model.Controllers
@@ -9,18 +11,13 @@ namespace la_mia_pizzeria_model.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly List<Pizza> _pizze;
+        private readonly PizzeDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, PizzeDbContext db)
         {
+            _db = db;
             _logger = logger;
-            _pizze = new List<Pizza>
-            {
-                new Pizza(0, "/img/MARGHERITA-1.jpg","Margerita", "Pomodori pelati, spolverata di formaggio grattugiato e fior di latte d’Agerola", 6.00f),
-                new Pizza(1, "/img/MARGHERITA-1.jpg", "Diavola", "Pomodori pelati, salame piccante spolverata di formaggio grattugiato e fior di latte d’Agerola",  7.00f),
-                new Pizza(2, "/img/MARGHERITA-1.jpg", "Prosciutto e Funghi", "Pomodori pelati, funghi, prosciutto spolverata di formaggio grattugiato e fior di latte d’Agerola", 8.00f),
-                new Pizza(3, "/img/MARGHERITA-1.jpg", "Napoli", "Pomodori pelati, spolverata di formaggio grattugiato e fior di latte d’Agerola",  9.00f),
-                new Pizza(4, "/img/MARGHERITA-1.jpg", "Emilia", "Ragu bolognese, spolverata di formaggio grattugiato e fior di latte d’Agerola",  10.00f),
-            };
+            
         }
 
         public IActionResult Index()
@@ -30,25 +27,26 @@ namespace la_mia_pizzeria_model.Controllers
 
         public IActionResult Menu()
         {
-            return View(_pizze);
+            List<Pizza> pizze = _db.Pizze.ToList();
+            return View(pizze);
         }
-
+        
         public IActionResult Create()
         {            
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Pizza pizza)
+        public IActionResult Create(Pizza pizza)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // aggiongo a database
-                return Menu();
+                return View(pizza);
             }
 
-            // ritorno indietro
-            return RedirectToAction()
+            _db.Pizze.Add(pizza);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Menu));
         }
 
 
