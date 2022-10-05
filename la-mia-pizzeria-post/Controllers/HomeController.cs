@@ -10,7 +10,6 @@ namespace la_mia_pizzeria_model.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly List<Pizza> _pizze;
         private readonly PizzeDbContext _db;
 
         public HomeController(ILogger<HomeController> logger, PizzeDbContext db)
@@ -43,7 +42,7 @@ namespace la_mia_pizzeria_model.Controllers
             {
                 return View(pizza);
             }
-
+            
             _db.Pizze.Add(pizza);
             _db.SaveChanges();
             return RedirectToAction(nameof(Menu));
@@ -52,7 +51,7 @@ namespace la_mia_pizzeria_model.Controllers
 
         public IActionResult Details(int id)
         {
-            Pizza? pizza = _pizze.Find(x=> x.Id == id);
+            Pizza? pizza = _db.Pizze.First(x => x.Id == id);
             return View(pizza);
         }
 

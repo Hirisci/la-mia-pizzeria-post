@@ -16,7 +16,7 @@
                             <p class="card-text flex-grow-1">@pizza.Descrition</p>
                             <div class="d-flex justify-content-between">
                                 <div class="card-button">
-                                    <a class="btn-square" asp-area="" asp-controller="Home" asp-action="Details">i</a>
+                                    <a class="btn-square" asp-area="" asp-controller="Home" asp-action="Details" asp-route-id="@pizza.Id">i</a>
                                 </div>
                                 <p class="card-text">@pizza.Amount.ToString("C")</p>
                             </div>
