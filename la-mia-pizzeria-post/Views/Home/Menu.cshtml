@@ -1,6 +1,9 @@
 ﻿@model List<Pizza>
 
 <div> 
+    <div class="d-flex flex-row-reverse mt-4">
+        <a class="btn btn-primary flex-end" asp-controller="Home" asp-action="Create">aggiungi pizza</a>
+    </div>
     <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
         @if(Model.Count >0 ){
             @foreach (Pizza pizza in Model)

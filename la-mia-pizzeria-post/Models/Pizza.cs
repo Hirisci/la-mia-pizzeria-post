@@ -1,9 +1,13 @@
-﻿namespace la_mia_pizzeria_post.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace la_mia_pizzeria_post.Models
 {
     public class Pizza
     {
+        [Key]
         public int Id { get; set; }
         public string? Img { get; set; }
+        
         public string? Name { get; set; }
         public string? Descrition { get; set; }
         public float Amount { get; set; }

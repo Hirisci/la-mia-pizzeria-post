@@ -33,6 +33,25 @@ namespace la_mia_pizzeria_model.Controllers
             return View(_pizze);
         }
 
+        public IActionResult Create()
+        {            
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Pizza pizza)
+        {
+            if (ModelState.IsValid)
+            {
+                // aggiongo a database
+                return Menu();
+            }
+
+            // ritorno indietro
+            return RedirectToAction()
+        }
+
+
         public IActionResult Details(int id)
         {
             Pizza? pizza = _pizze.Find(x=> x.Id == id);
