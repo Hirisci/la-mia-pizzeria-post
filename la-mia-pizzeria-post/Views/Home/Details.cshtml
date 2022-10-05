@@ -1,0 +1,21 @@
+﻿@model Pizza
+
+
+<div>
+    <div class="col mt-4">
+        <div class="card h-100">
+            <img src="@Model.Img" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="card-text flex-grow-1">@Model.Descrition</p>
+                <div class="d-flex justify-content-between">
+                    <div class="card-button">
+                        <a class="btn-square" asp-controller="Home" asp-action="Menu"><</a>
+                    </div>
+                    <p class="card-text">@Model.Amount.ToString("C")</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
