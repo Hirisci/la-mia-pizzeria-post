@@ -24,6 +24,7 @@ namespace la_mia_pizzeria_model.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Menu()
         {
             List<Pizza> pizze = _db.Pizze.ToList();
@@ -36,6 +37,7 @@ namespace la_mia_pizzeria_model.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Pizza pizza)
         {
             if (!ModelState.IsValid)
@@ -48,7 +50,7 @@ namespace la_mia_pizzeria_model.Controllers
             return RedirectToAction(nameof(Menu));
         }
 
-
+        [HttpGet]
         public IActionResult Details(int id)
         {
             Pizza? pizza = _db.Pizze.First(x => x.Id == id);
