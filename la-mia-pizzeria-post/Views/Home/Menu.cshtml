@@ -2,7 +2,7 @@
 
 <div> 
     <div class="d-flex flex-row-reverse mt-4">
-        <a class="btn btn-primary flex-end" asp-controller="Home" asp-action="Create">aggiungi pizza</a>
+        <a class="btn btn-primary flex-end" asp-controller="Home" asp-action="Create"><i class="fa-solid fa-circle-plus text-white"></i> Aggiungi Pizza</a>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4 mt-4">
         @if(Model.Count >0 ){
@@ -15,8 +15,10 @@
                             <h5 class="card-title">@pizza.Name</h5>
                             <p class="card-text flex-grow-1">@pizza.Descrition</p>
                             <div class="d-flex justify-content-between">
-                                <div class="card-button">
-                                    <a class="btn-square" asp-area="" asp-controller="Home" asp-action="Details" asp-route-id="@pizza.Id">i</a>
+                                <div class="card-button d-flex gap-2">
+                                    <a asp-area="" asp-controller="Home" asp-action="Details" asp-route-id="@pizza.Id"><i class="fa-solid fa-circle-info text-primary"></i></a>
+                                    <a href="#"><i class="fa-solid fa-pen-to-square text-warning"></i></a>
+                                    <a href="#"><i class="fa-solid fa-trash-can my-px text-danger"></i></a>
                                 </div>
                                 <p class="card-text">@pizza.Amount.ToString("C")</p>
                             </div>
